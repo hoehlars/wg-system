@@ -1,0 +1,47 @@
+input[type=checkbox]:checked + label{
+    text-decoration: line-through;
+    text-decoration-color: black;
+    text-decoration-thickness: 2px;
+  }
+
+input[type=checkbox] {
+    /* larger checkboxes */
+  -ms-transform: scale(1.5); /* IE */
+  -moz-transform: scale(1.5); /* FF */
+  -webkit-transform: scale(1.5); /* Safari and Chrome */
+  -o-transform: scale(1.5); /* Opera */
+  transform: scale(1.5);
+  margin-left: 2%;
+}
+
+Form {
+    margin-top: 10%;
+}
+
+.checkBox {
+    margin-right: 2%;
+}
+
+.changeChoreIcon {
+    margin-right: 3px;
+    margin-bottom: 3px;
+}
+
+h3 {
+    color: white;
+}
+
+li {
+    align-items: center;
+    font-size: 120%;
+}
+
+ul {
+    list-style: circle;
+    list-style-position: inside;
+    list-style-image: url("../../assets/icon/taskIcon.svg");
+}
+
+label {
+    font-size: 140%;
+}

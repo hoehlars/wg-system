@@ -1,0 +1,51 @@
+.debtList {
+    list-style:none;
+    margin-bottom: 10%;
+    padding-left: 0;
+}
+
+.debt {
+    border: solid;
+    border-width: 1px;
+    border-color: lightgray;
+    border-radius: 15px;
+    padding: 2%;
+    font-size: 90%;
+    display: flex;
+    flex: 1
+}
+
+.debtText {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.debtText > p {
+    margin-bottom: 1%;
+}
+
+.newDebtInput {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+input {
+    text-align: center;
+}
+
+.newDebtSingleInput {
+    margin: 1%;
+    padding: 1%;
+}
+
+.newDebtButton {
+    margin: 1%;
+    padding: 1%
+}
+
+.noDebtText {
+    margin-Top: 10%;
+    text-align: center;
+}
