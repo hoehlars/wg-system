@@ -3,10 +3,13 @@ import Button from "react-bootstrap/Button";
 import Chore from "../../types/chore";
 import Form from "react-bootstrap/Form";
 import "./ChoresCard.css";
+import {ChoreService} from "../../services/choreService"
 import changeChoreIcon from "../../assets/icon/changeChoreIcon.svg";
 import expandMoreIcon from "../../assets/icon/expandMoreIcon.svg";
 import expandLessIcon from "../../assets/icon/expandLessIcon.svg";
 import taskIcon from "../../assets/icon/taskIcon.svg";
+import { DebtService } from "../../services/debtService";
+import FormGroup from "react-bootstrap/esm/FormGroup";
 
 interface ChoresCardState {
   chores: Chore[];
@@ -17,54 +20,38 @@ class ChoresCard extends React.Component<{}, ChoresCardState> {
     super(props);
 
     this.state = {
-      chores: [
-        {
-          choreName: "Bad",
-          choreDoer: "Lars",
-          id: "0",
-          done: false,
-          choreTasks: ["Lavabo putzen"],
-          showDescriptionChore: false,
-        },
-        {
-          choreName: "Boden",
-          choreDoer: "Florian",
-          id: "1",
-          done: false,
-          choreTasks: ["Staubsaugen"],
-          showDescriptionChore: false,
-        },
-        {
-          choreName: "Küche",
-          choreDoer: "Thomas",
-          id: "2",
-          done: false,
-          choreTasks: ["Oberflächen putzen"],
-          showDescriptionChore: false,
-        },
-      ],
+      chores: [],
     };
   }
 
-  private handleChangeChores(): void {
-    // TO DO: send change ämtli event to backend and get new data of backend
+  async componentDidMount() {
+    const chores = await ChoreService.getAllChores();
+    console.log(chores);
+    this.setState({
+      chores
+    })
   }
 
-  private handleFinishedChore(chorId: string): void {
-    let chores = [...this.state.chores];
-    const changedChor = chores.find((chor) => {
-      return chorId === chor.id;
-    });
-    changedChor.done = !changedChor.done;
-    const idx = chores.findIndex((chor) => {
-      return chorId === chor.id;
-    });
-    chores.splice(idx, 1, changedChor);
-    this.setState({
-      chores,
-    });
+  private async handleChangeChores(): Promise<void> {
 
-    // TO DO: send status update to backend
+    const choresNotDone = this.state.chores.filter((chore) => {
+      return chore.done === false;
+    })
+
+    const chores = await ChoreService.changeChors();
+
+    this.setState({
+      chores
+    })
+  }
+
+  private async handleFinishedChore(chorId: string): Promise<void> {
+    
+    const chores = await ChoreService.updateChoreFinished(chorId);
+
+    this.setState({
+      chores
+    })
   }
 
   private handleShowChoresDescription(chorId: string): void {
@@ -119,6 +106,7 @@ class ChoresCard extends React.Component<{}, ChoresCardState> {
                 value="1"
                 id={`checkbox-${chore.id}`}
                 name=""
+                checked={chore.done}
                 onChange={() => this.handleFinishedChore(chore.id)}
               />
               <label

@@ -15,6 +15,10 @@
     flex: 1
 }
 
+.debt:hover {
+    background-color: lightslategray;
+}
+
 .debtText {
     display: flex;
     flex: 1;
@@ -33,6 +37,7 @@
 
 input {
     text-align: center;
+    border-radius: 10px;
 }
 
 .newDebtSingleInput {
@@ -48,4 +53,23 @@ input {
 .noDebtText {
     margin-Top: 10%;
     text-align: center;
+}
+
+input:focus {
+    background-color: lightgray;
+}
+
+input:focus:valid {
+    background-color:green
+}
+
+input:focus:invalid {
+    background-color: red;
+}
+
+.error {
+    text-align: center;
+    color: red;
+    font-weight: bold;
+    margin-top: 3%;
 }

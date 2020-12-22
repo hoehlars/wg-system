@@ -4,6 +4,7 @@ interface Debt {
   from: string;
   id: string;
   reason: string;
+  date: string;
 }
 
 export default Debt;

@@ -1,12 +1,27 @@
-import express from 'express';
+import BodyParser from 'body-parser';
+import cors from 'cors';
+import Express from 'express';
+import HTTP from 'http';
+import { errorHandler } from './expressErrorHandler';
 
-const app = express();
+
+import { logger } from './logger';
+import { registerRoutes } from './routes';
+
 const port = 5000;
-app.get('/', (req, res) => {
-  res.send('Welcome to the WG-System!');
-});
+
+const express = Express();
+const server = new HTTP.Server(express);
 
 
-app.listen(port, () => {
-  return console.log(`server is listening on ${port}`);
+express.use(BodyParser.json());
+express.use(BodyParser.urlencoded({ extended: true }));
+express.use(cors());
+
+registerRoutes(express);
+
+express.use(errorHandler);
+
+server.listen(port, () => {
+  logger.info(`Listening on ${port}`);
 });
