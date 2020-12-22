@@ -74,7 +74,7 @@ export class DebtController {
   }
 
 
-  public static createDebtBackend(reason: string, to: string, from: string, amount: number) {
+  public static createDebtBackend(reason: string, to: string, from: string, amount: number): void {
     const uuid: string = uuidv4();
     const date = new Date();
     const formattedDate = `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`

@@ -3,13 +3,11 @@ import Button from "react-bootstrap/Button";
 import Chore from "../../types/chore";
 import Form from "react-bootstrap/Form";
 import "./ChoresCard.css";
-import {ChoreService} from "../../services/choreService"
+import { ChoreService } from "../../services/choreService";
 import changeChoreIcon from "../../assets/icon/changeChoreIcon.svg";
 import expandMoreIcon from "../../assets/icon/expandMoreIcon.svg";
 import expandLessIcon from "../../assets/icon/expandLessIcon.svg";
 import taskIcon from "../../assets/icon/taskIcon.svg";
-import { DebtService } from "../../services/debtService";
-import FormGroup from "react-bootstrap/esm/FormGroup";
 
 interface ChoresCardState {
   chores: Chore[];
@@ -28,30 +26,24 @@ class ChoresCard extends React.Component<{}, ChoresCardState> {
     const chores = await ChoreService.getAllChores();
     console.log(chores);
     this.setState({
-      chores
-    })
+      chores,
+    });
   }
 
   private async handleChangeChores(): Promise<void> {
-
-    const choresNotDone = this.state.chores.filter((chore) => {
-      return chore.done === false;
-    })
-
     const chores = await ChoreService.changeChors();
 
     this.setState({
-      chores
-    })
+      chores,
+    });
   }
 
   private async handleFinishedChore(chorId: string): Promise<void> {
-    
     const chores = await ChoreService.updateChoreFinished(chorId);
 
     this.setState({
-      chores
-    })
+      chores,
+    });
   }
 
   private handleShowChoresDescription(chorId: string): void {

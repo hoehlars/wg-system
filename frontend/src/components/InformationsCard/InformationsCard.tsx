@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
 
 class InformationsCard extends React.Component<{}, {}> {
   render() {

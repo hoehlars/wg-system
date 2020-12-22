@@ -1,8 +1,9 @@
 import {HomeController} from './controller/home'
 import {ChoreController} from './controller/chore'
 import {DebtController} from './controller/debt'
+import { Express } from 'express-serve-static-core';
 
-export const registerRoutes = (api): void => {
+export const registerRoutes = (api: Express): void => {
   
     // api routes
     api.get('/', HomeController.index);

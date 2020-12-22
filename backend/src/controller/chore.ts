@@ -40,7 +40,7 @@ export class ChoreController {
       return;
     }
 
-    let updatedChore = ChoreController.chores.find((chore) => {
+    const updatedChore = ChoreController.chores.find((chore) => {
       return chore.id === req.params.choreId;
     })
 
@@ -54,14 +54,6 @@ export class ChoreController {
     }
 
     ChoreController.chores.splice(idx, 1, newChore)
-
-    let {done} = updatedChore;
-
-    done = !done;
-
-
-
-
     res.json(ChoreController.chores);
   }
   

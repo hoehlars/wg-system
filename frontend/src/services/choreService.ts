@@ -1,8 +1,6 @@
 import Chore from "../types/chore";
 
-
 export class ChoreService {
-
   static async getAllChores(): Promise<Chore[]> {
     const res = await fetch(`http://localhost:5000/api/chores`, {
       method: "GET",
