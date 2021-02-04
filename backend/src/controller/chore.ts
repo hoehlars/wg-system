@@ -9,10 +9,10 @@ export class ChoreController {
     choreName: "Bad",
     id: "0",
     done: false,
-    choreTasks: ["Lavabo", "Spiegel", "Spiegelschrank", "Dusche mit Schwamm", "Duschkopf", "Duschschlauch", "Duschhahnen"]
+    choreTasks: ["Lavabo WC", "WC", "Spiegel WC", "Lavabo Dusche", "Spiegel Dusche", "Dusche"]
   }, 
   {
-    choreDoer: "Thomas",
+    choreDoer: "Mary",
     choreName: "Küche",
     id: "1",
     done: false,
@@ -23,7 +23,7 @@ export class ChoreController {
     choreName: "Boden",
     id: "2",
     done: false,
-    choreTasks: ["Wohnzimmerboden", "Küchenboden", "WC-Boden", "Dusch-WC-Boden", "Gang"]
+    choreTasks: ["Staubsaugern", "Aufnehmen"]
   }]
 
   public static getAllChores(req: Request, res: Response): void {

@@ -17,8 +17,9 @@ class Home extends React.Component<{}, {}> {
     return (
       <div>
         <div className="Cards">
+
           <div className="Card">
-            <InformationsCard />
+              <DebtsCard />
           </div>
 
           <div className="Card">
@@ -26,8 +27,9 @@ class Home extends React.Component<{}, {}> {
           </div>
 
           <div className="Card">
-            <DebtsCard />
+            <InformationsCard />
           </div>
+
         </div>
       </div>
     );
