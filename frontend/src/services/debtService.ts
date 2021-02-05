@@ -1,5 +1,6 @@
 import Debt from "../types/debt";
 
+
 export class DebtService {
   static async createDebt(
     reason: string,
@@ -7,7 +8,7 @@ export class DebtService {
     from: string,
     amount: number
   ): Promise<Response> {
-    const res = await fetch(`${process.env.BACKEND_IP}/api/debts`, {
+    const res = await fetch(`${process.env.REACT_APP_BACKEND_IP}/api/debts`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -24,7 +25,7 @@ export class DebtService {
   }
 
   static async getAllDebts(): Promise<Debt[]> {
-    const res = await fetch(`${process.env.BACKEND_IP}/api/debts`, {
+    const res = await fetch(`${process.env.REACT_APP_BACKEND_IP}/api/debts`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -35,7 +36,7 @@ export class DebtService {
   }
 
   static async deleteDebt(id: string): Promise<Debt[]> {
-    const res = await fetch(`${process.env.BACKEND_IP}/api/debts/${id}`, {
+    const res = await fetch(`${process.env.REACT_APP_BACKEND_IP}/api/debts/${id}`, {
       method: "DELETE",
       headers: {
         Accept: "application/json",
