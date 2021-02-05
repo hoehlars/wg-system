@@ -2,7 +2,7 @@ import Chore from "../types/chore";
 
 export class ChoreService {
   static async getAllChores(): Promise<Chore[]> {
-    const res = await fetch(`http://localhost:5000/api/chores`, {
+    const res = await fetch(`${process.env.BACKEND_IP}/api/chores`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -13,7 +13,7 @@ export class ChoreService {
   }
 
   static async changeChors(): Promise<Chore[]> {
-    const res = await fetch(`http://localhost:5000/api/chores/changeChors`, {
+    const res = await fetch(`${process.env.BACKEND_IP}/api/chores/changeChors`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -24,7 +24,7 @@ export class ChoreService {
   }
 
   static async updateChoreFinished(choreId: string): Promise<Chore[]> {
-    const res = await fetch(`http://localhost:5000/api/chores/${choreId}`, {
+    const res = await fetch(`${process.env.BACKEND_IP}/api/chores/${choreId}`, {
       method: "PATCH",
       headers: {
         Accept: "application/json",

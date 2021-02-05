@@ -7,7 +7,7 @@ export class DebtService {
     from: string,
     amount: number
   ): Promise<Response> {
-    const res = await fetch(`http://localhost:5000/api/debts`, {
+    const res = await fetch(`${process.env.BACKEND_IP}/api/debts`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -24,7 +24,7 @@ export class DebtService {
   }
 
   static async getAllDebts(): Promise<Debt[]> {
-    const res = await fetch(`http://localhost:5000/api/debts`, {
+    const res = await fetch(`${process.env.BACKEND_IP}/api/debts`, {
       method: "GET",
       headers: {
         Accept: "application/json",
@@ -35,7 +35,7 @@ export class DebtService {
   }
 
   static async deleteDebt(id: string): Promise<Debt[]> {
-    const res = await fetch(`http://localhost:5000/api/debts/${id}`, {
+    const res = await fetch(`${process.env.BACKEND_IP}/api/debts/${id}`, {
       method: "DELETE",
       headers: {
         Accept: "application/json",
