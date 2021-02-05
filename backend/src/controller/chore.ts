@@ -19,7 +19,7 @@ export class ChoreController {
     choreTasks: ["Herd", "Becken", "Hahnen", "Oberflächen", "Mikrowelle (falls nötig)", "Kaffeemaschine (falls nötig)"]
   },
   {
-    choreDoer: "Flo",
+    choreDoer: "TBD",
     choreName: "Boden",
     id: "2",
     done: false,
