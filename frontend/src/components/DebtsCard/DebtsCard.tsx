@@ -112,6 +112,7 @@ class DebtsCard extends React.Component<{}, DebtsCardState> {
         </ul>
 
         <form className="newDebtInput">
+          <h4>Neue Schuld hinzufügen</h4>
           <input
             required
             className="newDebtSingleInput"
@@ -193,6 +194,7 @@ class DebtsCard extends React.Component<{}, DebtsCardState> {
 
 
         <ul className="oldDebtList">
+          <h4>Erledigte Schulden</h4>
           {this.state.debtsDone.map((debt) => (
             <div key={`${debt.id}`} className="mb-2">
               <li className="debt">
