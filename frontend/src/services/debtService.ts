@@ -35,6 +35,17 @@ export class DebtService {
     return res.json();
   }
 
+  static async getDebtsDone(): Promise<Debt[]> {
+    const res = await fetch(`${process.env.REACT_APP_BACKEND_IP}/api/debts/done`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+    return res.json();
+  }
+
   static async deleteDebt(id: string): Promise<Debt[]> {
     const res = await fetch(`${process.env.REACT_APP_BACKEND_IP}/api/debts/${id}`, {
       method: "DELETE",

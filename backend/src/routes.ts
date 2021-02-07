@@ -16,6 +16,7 @@ export const registerRoutes = (api: Express): void => {
 
      /* debts */
      api.get('/api/debts', DebtController.getAllDebts);
+     api.get('/api/debts/done', DebtController.getDebtsDone)
      api.post('/api/debts', DebtController.createDebt);
      api.delete('/api/debts/:debtId', DebtController.deleteDebt)
 

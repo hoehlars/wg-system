@@ -6,6 +6,7 @@ import { DebtService } from "./../../services/debtService";
 
 interface DebtsCardState {
   debts: Debt[];
+  debtsDone: Debt[];
   newDebt: {
     reason: string;
     from: string;
@@ -21,6 +22,7 @@ class DebtsCard extends React.Component<{}, DebtsCardState> {
 
     this.state = {
       debts: [],
+      debtsDone: [],
       newDebt: {
         reason: "",
         from: "",
@@ -33,9 +35,11 @@ class DebtsCard extends React.Component<{}, DebtsCardState> {
 
   async componentDidMount() {
     const debts = await DebtService.getAllDebts();
+    const debtsDone = await DebtService.getDebtsDone();
 
     this.setState({
       debts,
+      debtsDone
     });
   }
 
@@ -186,6 +190,24 @@ class DebtsCard extends React.Component<{}, DebtsCardState> {
             Neue Schuld hinzufügen
           </Button>
         </form>
+
+
+        <ul className="oldDebtList">
+          {this.state.debtsDone.map((debt) => (
+            <div key={`${debt.id}`} className="mb-2">
+              <li className="debt">
+                <div className="debtText">
+                  <p>{`${debt.from} schuldet ${debt.to}: ${debt.amount}.- CHF`}</p>
+                  <p>{`Grund: ${debt.reason}`}</p>
+                  <p>{`Erstellt: ${debt.date}`}</p>
+                </div>
+                <p className="debtsDoneText">
+                  Erledigt!
+                </p>
+              </li>
+            </div>
+          ))}
+        </ul>
       </div>
     );
   }
