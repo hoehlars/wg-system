@@ -20,7 +20,19 @@ services:
       - "5000:5000"
     container_name: backend
     restart: on-failure
+    depends_on: 
+      - mongo
+    environment:
+      - PORT=5000
+      - MONGODB_URI=mongodb://mongo:27017/wg-system
     volumes:
       - ./backend:/usr/src/app/backend/api
       - /usr/src/app/backend/node_modules
+
+  mongo:
+    image: mongo:4
+    container_name: mongodb
+    ports:
+    - 27017:27017
+    restart: on-failure
   
