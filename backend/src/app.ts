@@ -3,12 +3,21 @@ import cors from 'cors';
 import Express from 'express';
 import HTTP from 'http';
 import { errorHandler } from './expressErrorHandler';
-
-
+import mongoose from 'mongoose';
 import { logger } from './logger';
 import { registerRoutes } from './routes';
 
-const port = 5000;
+mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true});
+const db = mongoose.connection;
+db.on('error', () => {
+  logger.error('Failed to setup connection with DB');
+})
+
+db.once('open', () => {
+  logger.info('Connected successfully to DB!')
+})
+
+const port = process.env.PORT || 5000;
 
 const express = Express();
 const server = new HTTP.Server(express);

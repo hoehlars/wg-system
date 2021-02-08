@@ -34,8 +34,27 @@ class DebtsCard extends React.Component<{}, DebtsCardState> {
   }
 
   async componentDidMount() {
-    const debts = await DebtService.getAllDebts();
+    this.updateDebts();
+  }
+
+  async updateDebts(): Promise<void> {
+    const debts = await DebtService.getAllDebtsNotDone();
     const debtsDone = await DebtService.getDebtsDone();
+
+    // parse dates 
+    debts.forEach((debt) => {
+      const date = new Date(debt.date);
+      const formattedDate = `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`
+      debt.date = formattedDate;
+    })
+
+    debtsDone.forEach((debtDone) => {
+      const date = new Date(debtDone.date);
+      const formattedDate = `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`
+      debtDone.date = formattedDate;
+    })
+
+    
 
     this.setState({
       debts,
@@ -47,19 +66,9 @@ class DebtsCard extends React.Component<{}, DebtsCardState> {
     const { reason, to, from, amount } = this.state.newDebt;
 
     // add to backend
-    const res = await DebtService.createDebt(reason, to, from, amount);
-    const debtJson = await res.json();
+    await DebtService.createDebt(reason, to, from, amount);
 
-    if (debtJson.error) {
-      this.setState({
-        error: "Fehler beim Hinzufügen einer Schuld.",
-      });
-    } else {
-      const debts = [debtJson, ...this.state.debts];
-      this.setState({
-        debts,
-      });
-    }
+    this.updateDebts();
 
     // clear text inputs
     this.setState({
@@ -73,10 +82,8 @@ class DebtsCard extends React.Component<{}, DebtsCardState> {
   }
 
   private async handlePayedDebt(debtId: string) {
-    const debts = await DebtService.deleteDebt(debtId);
-    this.setState({
-      debts,
-    });
+    await DebtService.patchDebt(debtId);
+    this.updateDebts();
   }
 
   render() {
@@ -101,7 +108,7 @@ class DebtsCard extends React.Component<{}, DebtsCardState> {
                   <p>{`Erstellt: ${debt.date}`}</p>
                 </div>
                 <Button
-                  onClick={() => this.handlePayedDebt(debt.id)}
+                  onClick={() => this.handlePayedDebt(debt._id)}
                   variant="secondary"
                 >
                   Bezahlt

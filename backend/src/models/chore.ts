@@ -1,5 +1,5 @@
 export interface Chore {
-        choreDoer: string;
+    choreDoer: string;
     choreName: string;
     id: string;
     done: boolean;

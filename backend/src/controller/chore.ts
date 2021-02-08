@@ -57,7 +57,7 @@ export class ChoreController {
     res.json(ChoreController.chores);
   }
   
-  public static changeChors(req: Request, res: Response): void {
+  public static changeChors(req: Request, res: Response, next: NextFunction): void {
     logger.info('POST Request on /api/chores/changeChores');
 
     // change chore names
@@ -74,7 +74,7 @@ export class ChoreController {
     console.log('choresNotDone', choresNotDone);
 
     choresNotDone.forEach((chore) => {
-      DebtController.createDebtBackend("Ämtli nicht gemacht!", chore.choreName, "Lars", 5);
+      DebtController.createDebtBackend("Ämtli nicht gemacht!", chore.choreName, "Lars", 5, next);
     })
 
     // reset all finished chores
