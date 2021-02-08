@@ -15,8 +15,8 @@ export const registerRoutes = (api: Express): void => {
 
 
      /* debts */
-     api.get('/api/debts', DebtController.getAllDebtsNotDone);
-     api.get('/api/debts/done', DebtController.getDebtsDone)
+     api.get('/api/debts', DebtController.getAllDebtsNotPayed);
+     api.get('/api/debts/payed', DebtController.getDebtsPayed)
      api.post('/api/debts', DebtController.createDebt);
      api.patch('/api/debts/:debtId', DebtController.patchDebt)
 

@@ -39,7 +39,7 @@ export class DebtController {
         from,
         amount,
         date: new Date(),
-        done: false
+        payed: false
     })
 
     newDebt.save((err, debt) => {
@@ -51,14 +51,14 @@ export class DebtController {
     res.json(newDebt);
   }
 
-  public static async getAllDebtsNotDone(req: Request, res: Response): Promise<void> {
+  public static async getAllDebtsNotPayed(req: Request, res: Response): Promise<void> {
     logger.info('GET Request on /api/debts');
-    res.json(await Debt.find({done: false}).sort('date'));
+    res.json(await Debt.find({payed: false}).sort('date'));
   }
 
-  public static async getDebtsDone(req: Request, res: Response): Promise<void> {
-    logger.info('GET REQUEST on /api/debts/done');
-    res.json(await Debt.find({done: true}).sort('-date'))
+  public static async getDebtsPayed(req: Request, res: Response): Promise<void> {
+    logger.info('GET REQUEST on /api/debts/payed');
+    res.json(await Debt.find({payed: true}).sort('-date'))
   }
 
   public static async patchDebt(req: Request, res: Response, next: NextFunction): Promise<void> {
@@ -70,25 +70,23 @@ export class DebtController {
         return;
     }
 
-    await Debt.findByIdAndUpdate(req.params.debtId, { $set: { done: true }});
+    await Debt.findByIdAndUpdate(req.params.debtId, { $set: { payed: true }});
 
-    res.json(await Debt.find({done: false}).sort('date'));
+    res.json(await Debt.find({payed: false}).sort('date'));
   }
 
 
-  public static createDebtBackend(reason: string, to: string, from: string, amount: number, next: NextFunction): void {
+  public static createDebtBackend(reason: string, to: string, from: string, amount: number): void {
     const newDebt: IDebt = new Debt ({
       reason,
       to,
       from,
       amount,
+      payed: false,
       date: new Date()
     });
 
-    newDebt.save((err,debt) => {
-      if(err) {
-        next(new Error('Error while inserting into DB!'));
-      }
+    newDebt.save( (err, debt) => {
       logger.info(`Debt from ${debt.from} to ${debt.to} with reason: ${debt.reason} saved in DB.`)
     });
   }

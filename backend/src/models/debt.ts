@@ -5,7 +5,7 @@ export interface IDebt extends mongoose.Document {
     to: string;
     from: string;
     amount: number;
-    done: boolean
+    payed: boolean
     date: Date;
 }
 
@@ -14,7 +14,7 @@ export const DebtSchema = new mongoose.Schema({
     to: {type: String, required: true},
     from: {type: String, required: true},
     amount: {type: Number, required: true},
-    done: {type: Boolean, required: true},
+    payed: {type: Boolean, required: true},
     date: {type: Date, required: true}
 })
 

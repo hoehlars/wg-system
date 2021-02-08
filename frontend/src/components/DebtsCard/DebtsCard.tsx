@@ -6,7 +6,7 @@ import { DebtService } from "./../../services/debtService";
 
 interface DebtsCardState {
   debts: Debt[];
-  debtsDone: Debt[];
+  debtsPayed: Debt[];
   newDebt: {
     reason: string;
     from: string;
@@ -22,7 +22,7 @@ class DebtsCard extends React.Component<{}, DebtsCardState> {
 
     this.state = {
       debts: [],
-      debtsDone: [],
+      debtsPayed: [],
       newDebt: {
         reason: "",
         from: "",
@@ -38,8 +38,8 @@ class DebtsCard extends React.Component<{}, DebtsCardState> {
   }
 
   async updateDebts(): Promise<void> {
-    const debts = await DebtService.getAllDebtsNotDone();
-    const debtsDone = await DebtService.getDebtsDone();
+    const debts = await DebtService.getAllDebtsNotPayed();
+    const debtsPayed = await DebtService.getDebtsPayed();
 
     // parse dates 
     debts.forEach((debt) => {
@@ -48,17 +48,17 @@ class DebtsCard extends React.Component<{}, DebtsCardState> {
       debt.date = formattedDate;
     })
 
-    debtsDone.forEach((debtDone) => {
-      const date = new Date(debtDone.date);
+    debtsPayed.forEach((debtPayed) => {
+      const date = new Date(debtPayed.date);
       const formattedDate = `${date.getDate()}.${date.getMonth()}.${date.getFullYear()}`
-      debtDone.date = formattedDate;
+      debtPayed.date = formattedDate;
     })
 
     
 
     this.setState({
       debts,
-      debtsDone
+      debtsPayed
     });
   }
 
@@ -202,15 +202,15 @@ class DebtsCard extends React.Component<{}, DebtsCardState> {
 
         <ul className="oldDebtList">
           <h4>Erledigte Schulden</h4>
-          {this.state.debtsDone.map((debt) => (
-            <div key={`${debt.id}`} className="mb-2">
+          {this.state.debtsPayed.map((debt) => (
+            <div key={`${debt._id}`} className="mb-2">
               <li className="debt">
                 <div className="debtText">
                   <p>{`${debt.from} schuldet ${debt.to}: ${debt.amount}.- CHF`}</p>
                   <p>{`Grund: ${debt.reason}`}</p>
                   <p>{`Erstellt: ${debt.date}`}</p>
                 </div>
-                <p className="debtsDoneText">
+                <p className="debtsPayedText">
                   Erledigt!
                 </p>
               </li>

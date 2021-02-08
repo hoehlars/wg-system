@@ -71,10 +71,8 @@ export class ChoreController {
       return chore.done === false
     })
 
-    console.log('choresNotDone', choresNotDone);
-
     choresNotDone.forEach((chore) => {
-      DebtController.createDebtBackend("Ämtli nicht gemacht!", chore.choreName, "Lars", 5, next);
+      DebtController.createDebtBackend("Ämtli nicht gemacht!", "Lars", chore.choreDoer, 5);
     })
 
     // reset all finished chores

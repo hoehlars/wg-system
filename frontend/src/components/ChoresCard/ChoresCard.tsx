@@ -24,7 +24,6 @@ class ChoresCard extends React.Component<{}, ChoresCardState> {
 
   async componentDidMount() {
     const chores = await ChoreService.getAllChores();
-    console.log(chores);
     this.setState({
       chores,
     });

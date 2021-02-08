@@ -24,7 +24,7 @@ export class DebtService {
     return res;
   }
 
-  static async getAllDebtsNotDone(): Promise<Debt[]> {
+  static async getAllDebtsNotPayed(): Promise<Debt[]> {
     const res = await fetch(`${process.env.REACT_APP_BACKEND_IP}/api/debts`, {
       method: "GET",
       headers: {
@@ -35,8 +35,8 @@ export class DebtService {
     return res.json();
   }
 
-  static async getDebtsDone(): Promise<Debt[]> {
-    const res = await fetch(`${process.env.REACT_APP_BACKEND_IP}/api/debts/done`, {
+  static async getDebtsPayed(): Promise<Debt[]> {
+    const res = await fetch(`${process.env.REACT_APP_BACKEND_IP}/api/debts/payed`, {
       method: "GET",
       headers: {
         Accept: "application/json",

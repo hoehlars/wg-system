@@ -2,6 +2,9 @@
     list-style:none;
     margin-bottom: 10%;
     padding-left: 0;
+    height: 400px;
+    scroll-behavior: smooth;
+    overflow-y: scroll;
 }
 
 .oldDebtList {
@@ -84,7 +87,7 @@ input:focus:invalid {
     margin-top: 3%;
 }
 
-.debtsDoneText {
+.debtsPayedText {
     border-style: solid;
     border-radius: 5px;
     border-width: 1px;
