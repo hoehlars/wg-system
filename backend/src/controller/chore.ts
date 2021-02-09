@@ -57,7 +57,7 @@ export class ChoreController {
     res.json(ChoreController.chores);
   }
   
-  public static changeChors(req: Request, res: Response, next: NextFunction): void {
+  public static changeChors(req: Request, res: Response): void {
     logger.info('POST Request on /api/chores/changeChores');
 
     // change chore names
