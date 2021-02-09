@@ -103,7 +103,6 @@ export class DebtController {
           }
         }
     ]);
-    console.log(result)
     res.json(result);
   }
 }
