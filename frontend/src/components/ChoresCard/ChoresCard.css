@@ -45,3 +45,12 @@ ul {
 label {
     font-size: 140%;
 }
+
+.mostChoresNotDone {
+    margin: 0;
+    padding-top: 2%;
+}
+
+.mostChoresNotDoneTitle {
+    margin-top: 10%;
+}

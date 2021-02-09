@@ -133,13 +133,9 @@ class ChoresCard extends React.Component<{}, ChoresCardState> {
           </Button>
         </p>
 
-        <h4>Bester Einzahler ins Kässeli</h4>
+        <h4 className="mostChoresNotDoneTitle">Bester Einzahler ins Kässeli</h4>
         {this.state.payedByChoresNotDoneByName.map((name) => (
-        <div key={`${name._id}`}>
-          <p>{`${name._id} hat bereits sovoiel ins Kässeli gezahlt: ${name.totalPayedByChors}`}</p>
-        </div>
-          
-          
+          <p  key={`${name._id}`} className="mostChoresNotDone">{`${name._id} hat bereits sovoiel ins Kässeli gezahlt: ${name.totalPayedByChors}`}</p> 
         ))}
       </div>
     );
