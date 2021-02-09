@@ -90,4 +90,20 @@ export class DebtController {
       logger.info(`Debt from ${debt.from} to ${debt.to} with reason: ${debt.reason} saved in DB.`)
     });
   }
+
+  public static async getPayedMostByChores(req: Request, res: Response): Promise<void> {
+    const result = await Debt.aggregate([
+        { 
+          $match: { payed : true } 
+        },
+        {
+          $group: {
+            _id: "$from",
+            totalPayedByChors: { $sum: "$amount"}
+          }
+        }
+    ]);
+    console.log(result)
+    res.json(result);
+  }
 }

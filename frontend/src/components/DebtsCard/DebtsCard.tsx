@@ -100,7 +100,7 @@ class DebtsCard extends React.Component<{}, DebtsCardState> {
 
         <ul className="debtList">
           {this.state.debts.map((debt) => (
-            <div key={`${debt.id}`} className="mb-2">
+            <div key={`${debt._id}`} className="mb-2">
               <li className="debt">
                 <div className="debtText">
                   <p>{`${debt.from} schuldet ${debt.to}: ${debt.amount}.- CHF`}</p>

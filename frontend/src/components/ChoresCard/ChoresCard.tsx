@@ -8,9 +8,11 @@ import changeChoreIcon from "../../assets/icon/changeChoreIcon.svg";
 import expandMoreIcon from "../../assets/icon/expandMoreIcon.svg";
 import expandLessIcon from "../../assets/icon/expandLessIcon.svg";
 import taskIcon from "../../assets/icon/taskIcon.svg";
+import { DebtService } from "../../services/debtService";
 
 interface ChoresCardState {
   chores: Chore[];
+  payedByChoresNotDoneByName: any[];
 }
 
 class ChoresCard extends React.Component<{}, ChoresCardState> {
@@ -19,14 +21,19 @@ class ChoresCard extends React.Component<{}, ChoresCardState> {
 
     this.state = {
       chores: [],
+      payedByChoresNotDoneByName: []
     };
   }
 
   async componentDidMount() {
     const chores = await ChoreService.getAllChores();
+    const payedByChoresNotDoneByName = await DebtService.getPayedMostByChores();
+    console.log(payedByChoresNotDoneByName)
     this.setState({
       chores,
+      payedByChoresNotDoneByName
     });
+  
   }
 
   private async handleChangeChores(): Promise<void> {
@@ -125,6 +132,15 @@ class ChoresCard extends React.Component<{}, ChoresCardState> {
             Ämtli wechseln
           </Button>
         </p>
+
+        <h4>Bester Einzahler ins Kässeli</h4>
+        {this.state.payedByChoresNotDoneByName.map((name) => (
+        <div key={`${name._id}`}>
+          <p>{`${name._id} hat bereits sovoiel ins Kässeli gezahlt: ${name.totalPayedByChors}`}</p>
+        </div>
+          
+          
+        ))}
       </div>
     );
   }

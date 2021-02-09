@@ -47,7 +47,6 @@ export class DebtService {
   }
 
   static async patchDebt(id: string): Promise<Debt[]> {
-    console.log(id); 
     const res = await fetch(`${process.env.REACT_APP_BACKEND_IP}/api/debts/${id}`, {
       method: "PATCH",
       headers: {
@@ -56,5 +55,17 @@ export class DebtService {
       },
     });
     return res.json();
+  }
+
+  static async getPayedMostByChores(): Promise<any> {
+    const res = await fetch(`${process.env.REACT_APP_BACKEND_IP}/api/debts/payedMostByChores`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+    return res.json();
+    
   }
 }
