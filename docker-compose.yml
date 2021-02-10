@@ -35,4 +35,6 @@ services:
     ports:
     - 27017:27017
     restart: on-failure
+    volumes:
+      - ./data:/data/db
   
